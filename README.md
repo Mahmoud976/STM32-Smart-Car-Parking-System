@@ -1,18 +1,12 @@
-﻿# 🚗 Smart Car Parking System (STM32F103)
+﻿# Smart Car Parking System (STM32F103)
 
-<p align="left">
-  <img src="https://shields.io" alt="MCU">
-  <img src="https://shields.io" alt="Architecture">
-  <img src="https://shields.io" alt="Language">
-  <img src="https://shields.io" alt="Compiler">
-  <img src="https://shields.io" alt="License">
-</p>
+[![License: MIT](https://shields.io)](LICENSE)
 
-An advanced, highly modular Embedded Systems project designed to automate and manage a smart car parking lot using the **STM32F103C6** (ARM Cortex-M3) microcontroller. The system features dynamic gate control, non-volatile state logging, and safe peripheral drivers written completely from scratch (MCAL/ECUAL layered architecture).
+An advanced, highly modular Embedded Systems project designed to automate and manage a smart car parking lot using the **STM32F103C6** (ARM Cortex-M3) microcontroller. The system features dynamic gate control, non-volatile state logging, and safe peripheral drivers written completely from scratch using an MCAL/ECUAL layered architecture.
 
 ---
 
-## 📸 System Overview & Simulation
+## System Overview & Simulation
 
 ### System Hardware Architecture
 Below is the hardware connections and interfacing schematic for the parking system peripherals. You can run the live design using the Proteus simulation files located inside the `Proteus/` directory.
@@ -23,7 +17,7 @@ Below is the hardware connections and interfacing schematic for the parking syst
 
 ---
 
-## 🏗️ Architectural Layering (Full System Breakdown)
+## Architectural Layering (Full System Breakdown)
 
 The firmware is designed using a strictly decoupled, layered architecture to separate application logic from low-level register manipulations. Below is the comprehensive map of all modules included in the repository:
 
@@ -53,7 +47,7 @@ graph TD
     end
 ```
 
-### 📂 Repository File Structure
+### Repository File Structure
 ```directory
 Smart-Car-Parking-System/
 │
@@ -81,7 +75,7 @@ Smart-Car-Parking-System/
 
 ---
 
-## ⚙️ Peripheral Integration Details (MCAL)
+## Peripheral Integration Details (MCAL)
 
 * **RCC Clock Driver:** Dynamically decodes `RCC->CFGR` to calculate system core frequencies ($16\text{ MHz}$ HSI / $8\text{ MHz}$ HSE), automatically adjusting clock propagation across AHB, APB1, and APB2 buses.
 * **GPIO Core Driver:** Manages atomic bit manipulation and handles full custom mode configurations (Analog, Input Floating, Pull-Up/Down, Push-Pull, and Open-Drain outputs).
@@ -93,7 +87,7 @@ Smart-Car-Parking-System/
 
 ---
 
-## 🎛️ Human-Machine Interface & Actuators (ECUAL)
+## Human-Machine Interface & Actuators (ECUAL)
 
 | Module Driver | Protocol / Connection | Architectural Function |
 | :--- | :--- | :--- |
@@ -106,7 +100,7 @@ Smart-Car-Parking-System/
 
 ---
 
-## 📊 Application Flow Chart
+## Application Flow Chart
 
 The system operates based on deterministic event polling and structural state flags. The execution loop lifecycle proceeds as follows:
 
@@ -135,12 +129,12 @@ stateDiagram-v2
 
 ---
 
-## 📜 Changelog
+## Changelog
 See the comprehensive release history, bug fixes, and development iterations in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ---
 
-## 🚀 Getting Started & Build Instructions
+## Getting Started & Build Instructions
 
 ### Prerequisites
 * **Development Environment:** [STM32CubeIDE](https://st.com) (Tested on Version 2.0.0+)
@@ -164,20 +158,20 @@ See the comprehensive release history, bug fixes, and development iterations in 
 
 ---
 
-## 🛠️ Future Roadmap Enhancements
+## Future Roadmap Enhancements
 - [ ] Integration of a custom lightweight RTOS Scheduler for multi-tasking.
 - [ ] Enhancing I2C handling via asynchronous non-blocking interrupts.
 - [ ] Multi-zone tracking optimization algorithms.
 
 ---
 
-## 📄 License
+## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👨‍💻 Author
+## Author
 **Mahmoud Saleh**
 * Embedded Systems Engineer
-* [GitHub Profile](https://github.com)
+* [GitHub Profile](https://github.com/Mahmoud976)
 * [LinkedIn Profile](https://linkedin.com)
