@@ -77,15 +77,18 @@ Smart-Car-Parking-System/
 
 ---
 
-## Peripheral Integration Details (MCAL)
+## ⚙️ Advanced Engineering & Architecture Highlights
 
-* **RCC Clock Driver:** Dynamically decodes `RCC->CFGR` to calculate system core frequencies ($16\text{ MHz}$ HSI / $8\text{ MHz}$ HSE), automatically adjusting clock propagation across AHB, APB1, and APB2 buses.
-* **GPIO Core Driver:** Manages atomic bit manipulation and handles full custom mode configurations (Analog, Input Floating, Pull-Up/Down, Push-Pull, and Open-Drain outputs).
-* **Interrupt Driver (EXTI):** Handles hardware event-triggered interrupts (such as sensor triggers or emergency bounds).
-* **Timer Driver:** Generates hardware-precise PWM outputs to drive gate positioning smoothly.
-* **UART Driver:** Custom asynchronous communication module featuring automatic Baudrate calculation utilizing active bus frequency polling APIs.
-* **I2C Driver:** Master/Slave protocol implementation optimized for byte-stream safety constraints, preventing runtime data corruption on transmission frames.
-* **SPI Driver:** Custom synchronous serial peripheral interface designed for high-speed local data bus extensions.
+This project was built entirely **from the ground up without relying on any vendor-provided HAL or ready-made templates**, demonstrating production-grade bare-metal firmware design.
+
+*   **100% Custom Boot and Memory Mapping:** Features a manually written Assembly Startup file (`startup_stm32f103c6tx.s`) for vector table initialization, alongside a custom Linker Script (`STM32F103C6TX_FLASH.ld`) configuring full Flash and RAM memory sector allocations.
+*   **AUTOSAR-Compliant API Design:** All MCAL and ECUAL peripheral APIs strictly enforce software robustness by returning standard status typings (`Std_ReturnType`). Dynamic state tracking is governed by defensive custom enumeration guards (`E_OK`, `E_NOT_OK`, `I2C_BUSY`, etc.).
+*   **Decoupled Architectural Layers:** Structural layout isolates core modules into strict domains:
+    *   `Core/APP/` & `Src/main.c`: Deterministic Application logic and FSM.
+    *   `Core/ECUAL/`: Hardware-independent device drivers (KeyPad, LCD, Servo, EEPROM, Buttons, LEDs).
+    *   `Core/MCAL/`: Native Register-Level Peripheral abstraction (RCC, GPIO, EXTI, Timers, UART, I2C, SPI).
+    *   `Core/Utilities/`: Standard platform-independent types, bit-manipulation macros, and common headers.
+
 
 ---
 
