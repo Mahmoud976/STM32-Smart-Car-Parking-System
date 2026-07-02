@@ -1,6 +1,7 @@
 ﻿# Smart Car Parking System (STM32F103)
 
-[![License: MIT](https://shields.io)](LICENSE)
+[![Release](https://shields.io)](https://github.com)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 An advanced, highly modular Embedded Systems project designed to automate and manage a smart car parking lot using the **STM32F103C6** (ARM Cortex-M3) microcontroller. The system features dynamic gate control, non-volatile state logging, and safe peripheral drivers written completely from scratch using an MCAL/ECUAL layered architecture.
 
