@@ -12,10 +12,10 @@ An advanced, highly modular Embedded Systems project designed to automate and ma
 
 ---
 
-## 📸 System Overview & Circuit
+## 📸 System Overview & Simulation
 
 ### System Hardware Architecture
-Below is the hardware connections and interfacing schematic for the parking system peripherals:
+Below is the hardware connections and interfacing schematic for the parking system peripherals. You can run the live design using the Proteus simulation files located inside the `Proteus/` directory.
 
 <p align="center">
   <img src="Docs/Circuit.png" alt="Smart Parking Circuit Diagram" width="800">
@@ -25,11 +25,11 @@ Below is the hardware connections and interfacing schematic for the parking syst
 
 ## 🏗️ Architectural Layering (Full System Breakdown)
 
-The firmware is designed using a strictly decoupled, layered layered architecture to separate application logic from low-level register manipulations. Below is the comprehensive map of all modules included in the repository:
+The firmware is designed using a strictly decoupled, layered architecture to separate application logic from low-level register manipulations. Below is the comprehensive map of all modules included in the repository:
 
 ```mermaid
 graph TD
-    APP[Application Layer: App.c / MCU_Config.h] --> ECUAL[ECU Abstraction Layer]
+    APP[Application Layer: Core/APP/ & Src/main.c] --> ECUAL[ECU Abstraction Layer]
     ECUAL --> MCAL[Microcontroller Abstraction Layer]
     MCAL --> HW[STM32F103C6 Hardware Core]
 
@@ -55,39 +55,38 @@ graph TD
 
 ### 📂 Repository File Structure
 ```directory
-├── Core/
-│   ├── APP/
-│   │   ├── App.c
-│   │   └── MCU_Config.h
-│   ├── ECUAL/
-│   │   ├── Button_Driver/
-│   │   ├── EEPROM_Driver/
-│   │   ├── KeyPad_Driver/
-│   │   ├── LCD_Driver/
-│   │   ├── Led_Driver/
-│   │   └── ServoMotor_Driver/
-│   ├── MCAL/
-│   │   ├── GPIO_Driver/
-│   │   ├── I2C_Driver/
-│   │   ├── Interrupt_Driver/
-│   │   ├── RCC_Driver/
-│   │   ├── SPI_Driver/
-│   │   ├── Timer_Driver/
-│   │   └── UART_Driver/
-│   └── Utilities/
-└── Docs/
-    ├── Circuit.png
-    └── ControlFlow-main.png
+Smart-Car-Parking-System/
+│
+├── Core/                              # Core Project Configurations & Drivers
+│   ├── APP/                           # Application Configurations (MCU_Config.h)
+│   ├── ECUAL/                         # ECU Abstraction Layer (Button, KeyPad, LCD, Servo, LED, EEPROM)
+│   ├── MCAL/                          # Microcontroller Abstraction Layer (GPIO, I2C, EXTI, RCC, SPI, Timer, UART)
+│   └── Utilities/                     # Shared standard types and helper macros
+│
+├── Src/                               # Main Application Source Files
+│   ├── main.c                         # Main program execution loop & logic
+│   ├── syscalls.c                     # Low-level system calls for ARM GCC compiler
+│   └── sysmem.c                       # System memory management & heap allocation
+│
+├── Startup/                           # Device Boot Sequence & Memory Linker Scripts
+│   ├── startup_stm32f103c6tx.s        # Assembly startup file (Vector table & Reset handler)
+│   └── STM32F103C6TX_FLASH.ld         # Linker script for Flash & RAM memory mapping
+│
+├── Proteus/                           # Contains the hardware simulation design files
+├── Docs/                              # System documentation images (Circuit, Flowcharts)
+├── CHANGELOG.md                       # Comprehensive version tracking history log
+├── LICENSE                            # MIT Open-Source Legal License text
+└── README.md                          # This Project Documentation file
 ```
 
 ---
 
 ## ⚙️ Peripheral Integration Details (MCAL)
 
-* **RCC Clock Driver:** Dynamically decodes `RCC->CFGR` to calculate system core frequencies ($16\text{ MHz}$ HSI / $8\text{ MHz}$ HSE), automatically adjustments clock propagation across AHB, APB1, and APB2 buses.
+* **RCC Clock Driver:** Dynamically decodes `RCC->CFGR` to calculate system core frequencies ($16\text{ MHz}$ HSI / $8\text{ MHz}$ HSE), automatically adjusting clock propagation across AHB, APB1, and APB2 buses.
 * **GPIO Core Driver:** Manages atomic bit manipulation and handles full custom mode configurations (Analog, Input Floating, Pull-Up/Down, Push-Pull, and Open-Drain outputs).
 * **Interrupt Driver (EXTI):** Handles hardware event-triggered interrupts (such as sensor triggers or emergency bounds).
-* **Timer Driver:** Generates hardware precise PWM outputs to drive gate positioning smoothly.
+* **Timer Driver:** Generates hardware-precise PWM outputs to drive gate positioning smoothly.
 * **UART Driver:** Custom asynchronous communication module featuring automatic Baudrate calculation utilizing active bus frequency polling APIs.
 * **I2C Driver:** Master/Slave protocol implementation optimized for byte-stream safety constraints, preventing runtime data corruption on transmission frames.
 * **SPI Driver:** Custom synchronous serial peripheral interface designed for high-speed local data bus extensions.
@@ -136,12 +135,17 @@ stateDiagram-v2
 
 ---
 
+## 📜 Changelog
+See the comprehensive release history, bug fixes, and development iterations in the [CHANGELOG.md](CHANGELOG.md) file.
+
+---
+
 ## 🚀 Getting Started & Build Instructions
 
 ### Prerequisites
 * **Development Environment:** [STM32CubeIDE](https://st.com) (Tested on Version 2.0.0+)
+* **Simulation Software:** Proteus Design Suite (for running files inside `Proteus/`)
 * **Toolchain:** `arm-none-eabi-gcc` (v13.3.1)
-* **Hardware Setup:** STM32F103C6 Dev Board (BluePill) + ST-Link V2 Debugger.
 
 ### Compiling from Source
 1. Clone the repository into your workspace directory:
@@ -175,5 +179,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👨‍💻 Author
 **Mahmoud Saleh**
 * Embedded Systems Engineer
-* [GitHub Profile](https://github.com/Mahmoud976)
+* [GitHub Profile](https://github.com)
 * [LinkedIn Profile](https://linkedin.com)
