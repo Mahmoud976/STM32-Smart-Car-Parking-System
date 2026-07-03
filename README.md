@@ -179,4 +179,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Mahmoud Saleh**
 * Embedded Systems Engineer
 * [GitHub Profile](https://github.com/Mahmoud976)
-* [LinkedIn Profile](https://linkedin.com)
+* [LinkedIn Profile](https://www.linkedin.com/in/mahmoud-m-saleh/)
